@@ -42,7 +42,9 @@ func readDir(directory string, callback func(file string)) {
 	}
 
 	for _, file := range files {
-		callback(filepath.Join(absPath, file.Name()))
+		if strings.HasSuffix(file.Name(), ".fastresume") {
+			callback(filepath.Join(absPath, file.Name()))
+		}
 	}
 }
 
