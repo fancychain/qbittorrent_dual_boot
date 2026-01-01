@@ -90,7 +90,11 @@ func convertToWindows(data string) string {
 }
 
 func fixPath(data string, oldPath string, newPath string, toLinux bool) string {
-	tmp := strings.ReplaceAll(data, oldPath, newPath)
+	tmp := data
+
+	if strings.HasPrefix(data, oldPath) {
+		tmp = newPath + data[len(oldPath):]
+	}
 
 	if toLinux {
 		return convertToLinux(tmp)
